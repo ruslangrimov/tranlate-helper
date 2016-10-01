@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popup</title>
+	<script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="script.js"></script>	
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">	
+	<link href="style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<div class="row top">
+		<div id="hint">
+			<select>
+				<option>...</option>
+			</select>			
+		</div>
+		<div id="stat">
+			...		
+		</div>		
+		<div id="bcg_txt">test</div>
+		<div id="bcg_hint"></div>		
+		<textarea id="main_txt" class="form-control">test</textarea>
+		<button id="tu_btn" type="button" value="" class="btn btn-default btn-sm"/>
+			<span class="glyphicon glyphicon-refresh"></span>
+		</button>
+
+	</div>
+	<div class="row bottom">
+		<div class="form-group col-xs-5">
+			<textarea id="tr_from" class="form-control"/></textarea>
+		</div>
+		<div class="form-group col-xs-1">
+			<div>
+				<select id="tr_res" class="form-control">
+					<option value="r">reverso</option>
+					<option value="g">google</option>
+					<option value="t">translate</option>								
+				</select>
+			</div>
+			<div class="div_rf">
+				<button id="t_btn" type="button" value=">>" class="btn btn-default btn-sm"/>
+					<span class="glyphicon glyphicon-refresh"></span>
+				</button>
+			</div>
+		</div>
+		<div class="form-group col-xs-5">
+			<textarea id="tr_to" class="form-control"/></textarea>
+		</div>	
+		<div class="form-group col-xs-1">
+			<button id="u_btn" type="button" value=">>" class="btn btn-default btn-sm"/>
+				<span class="glyphicon glyphicon-arrow-up"></span>
+			</button>		
+		</div>					
+	</div>
+	<div class="bottom_adv">
+		<div id="reverso">
+			<div id="phrase">
+				
+			</div>
+			<div id="drans">
+				
+			</div>	
+			<div id="rtr">
+				
+			</div>						
+		</div>
+		<div id="google">
+			loading ...
+		</div>
+		<div id="translate_t">
+			loading ...
+		</div>				
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿{
+  "name":"Translate Helper",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48":"icon.png",
+    "16":"icon16.png"
+  },
+  "browser_action":{      
+    "default_title": "Translate helper",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"   //page for popup window
+  },
+  "permissions": [  //third party resources that script needs access to
+    "tabs", "contextMenus", "http://books.google.com/*", "https://books.google.com/*", "http://context.reverso.net/*", "http://www.translate.ru/*", "https://translate.google.ru/*"
+  ],
+  "web_accessible_resources": [
+    "style.css"
+  ]
+}
