@@ -15,7 +15,7 @@
     "default_popup": "popup.html"   //page for popup window
   },
   "permissions": [  //third party resources that script needs access to
-    "tabs", "contextMenus", "http://books.google.com/*", "https://books.google.com/*", "http://context.reverso.net/*", "http://www.translate.ru/*", "https://translate.google.ru/*"
+    "tabs", "contextMenus", "http://books.google.com/*", "https://books.google.com/*", "http://context.reverso.net/*", "http://www.translate.ru/*", "https://translate.google.ru/*", "https://ssl.microsofttranslator.com/*"
   ],
   "web_accessible_resources": [
     "style.css"

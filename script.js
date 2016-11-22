@@ -65,7 +65,7 @@ function updateNGrams(ngrams) {
 	for (k in ngrams) {
 		window.ngrams[k] = ngrams[k];
 	}
-	console.log(window.ngrams);
+	//console.log(window.ngrams);
 	localStorage['ngrams'] = JSON.stringify(window.ngrams);
 }
 
@@ -179,6 +179,13 @@ function updateT(translation) {
 	}
 }
 
+function updateM(translation) {
+	$("#microsoft").text('');
+
+	$("#tr_to").val(translation.text);
+	$('#translate_m').finish().hide();
+}
+
 function hashCode(str){
     var hash = 0;
     if (str.length == 0) return hash;
@@ -203,9 +210,11 @@ function updateBackground(txt) {
 			if (window.ngrams[str] > 0) {
 				vc  = str.split(' ').length;
 				rs  = new RegExp(str.replace(/([\s]{1})/gim, '[\\W]+'), 'gim');
-				console.log(rs)
+				//console.log(rs)
 				tmp = txt.replace(rs, '<span class="ng_'+vc+'_hint">$&</span>');
-				h.append('<div class="ng_hint">'+tmp+'</div>');
+				if (tmp != txt) {
+					h.append('<div class="ng_hint">'+tmp+'</div>');
+				}
 			}
 		}
 
@@ -298,6 +307,8 @@ function main() {
 				updateGoogle(data.translation);
 		    } else if (data.action == 't_translate_a') {
 				updateT(data.translation);				
+		    } else if (data.action == 'm_translate_a') {
+				updateM(data.translation);				
 		    }
 
 		});	
@@ -305,7 +316,7 @@ function main() {
 		if (localStorage['ngrams']) {
 			window.ngrams = $.parseJSON(localStorage['ngrams']);	
 		}
-		console.log(window.ngrams);
+		//console.log(window.ngrams);
 
 		$("textarea, #tr_res").each(function(i, obj) {
 			$(obj).val(localStorage[obj.id]);
@@ -356,6 +367,10 @@ function main() {
 				if ($("#tr_from").val()) {
 					chrome.runtime.sendMessage({action: 't_translate', word: $("#tr_from").val()});
 				}
+			} else if (v == 'm') {
+				if ($("#tr_from").val()) {
+					chrome.runtime.sendMessage({action: 'm_translate', word: $("#tr_from").val()});
+				}
 			}
 		});		
 
@@ -375,6 +390,8 @@ function main() {
 				$("#google").finish().show().siblings().finish().hide();				
 			} else if (v == 't') {
 				$("#translate_t").finish().show().siblings().finish().hide();
+			} else if (v == 'm') {
+				$("#translate_m").finish().show().siblings().finish().hide();
 			}	
 			$("#t_btn").click();	
 		});
