@@ -42,11 +42,13 @@ function getGNGrams(words, isWC) {
 }
 
 function remTags(s) {
-    s = s.replace(/<\/div>/igm, '');                   
-    s = s.replace(/<div class="text"[^>]*?>\s*/igm, '');  
+    s = s.replace(/\s*<\/div>/igm, '');  
+    s = s.replace(/\s*<\/span>/igm, '');                 
+    s = s.replace(/<div[^>]*?>\s*/igm, '');
+    s = s.replace(/<span[^>]*?>\s*/igm, '');  
     s = s.replace(/<\/a>/igm, '');                   
     s = s.replace(/<a[^>]*?>/igm, '');   
-    s = s.replace(/<em>/igm, '<a>');
+    s = s.replace(/<em[^>]*?>/igm, '<a>');
     s = s.replace(/<\/em>/igm, '</a>'); 
     return s;
 }
@@ -61,7 +63,7 @@ function transReverso(word) {
     $.ajax({
         url: url,
         success: function (text) {
-            var sexps = /<span class="entry"[^>]*>(.*?)<\/span>/igm;
+            var sexps = /<em class='translation'>(.*?)<\/em>/igm;
             var dtrans = [];
             while (d = sexps.exec(text)) {
                 dtrans.push(d[1]);
@@ -69,7 +71,7 @@ function transReverso(word) {
 
             var tr = {phrase: /id="entry" value="([^"]*?)"/igm.exec(text)[1], dtrans: dtrans, translation: []};
 
-            var expr = /<div class="text"[^>]*?>\s*(.*?)\s*<\/div>/igm;
+            var expr = /<div class="[^"]*ltr">\s*.*\s*<span class="text"[^>]*>\s*(.*?)\s*<\/div>/igm;
             var d = text.match(expr);
             for (var n  = 0; n < d.length; n += 2) {
                 tr.translation.push([remTags(d[n]), remTags(d[n + 1])]);
@@ -190,7 +192,7 @@ function transMicrosoft(word) {
 function transGoogle(word) {
     var rev = word.charCodeAt(0) < 127;  
     var l1 = rev ? 'en' : 'ru';
-    var l2 = rev ? 'ru' : 'en';    
+    var l2 = rev ? 'ru' : 'en'; 
     var G_URL = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl='+l2+'&hl='+l1+'&dt=t&dt=bd&dj=1&source=input&tk=0&q=';  
     $.ajax({
         url: G_URL + word,
